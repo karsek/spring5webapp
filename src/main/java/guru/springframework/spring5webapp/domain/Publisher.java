@@ -1,8 +1,6 @@
 package guru.springframework.spring5webapp.domain;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import java.util.StringJoiner;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +14,22 @@ public class Publisher {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String name;
-  private Set<Book> books = new HashSet<>();
+  private String address;
+  private String city;
+  private String state;
+  private String zip;
+
 
   public Publisher() {
+  }
+
+  public Publisher(String name, String address, String city, String state,
+      String zip) {
+    this.name = name;
+    this.address = address;
+    this.city = city;
+    this.state = state;
+    this.zip = zip;
   }
 
   public Publisher(Long id, String name) {
@@ -42,12 +53,36 @@ public class Publisher {
     this.name = name;
   }
 
-  public Set<Book> getBooks() {
-    return books;
+  public String getAddress() {
+    return address;
   }
 
-  public void setBooks(Set<Book> books) {
-    this.books = books;
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+  public String getState() {
+    return state;
+  }
+
+  public void setState(String state) {
+    this.state = state;
+  }
+
+  public String getZip() {
+    return zip;
+  }
+
+  public void setZip(String zip) {
+    this.zip = zip;
   }
 
   @Override
@@ -59,7 +94,12 @@ public class Publisher {
       return false;
     }
     Publisher publisher = (Publisher) o;
-    return Objects.equals(id, publisher.id);
+    return Objects.equals(id, publisher.id) &&
+        Objects.equals(name, publisher.name) &&
+        Objects.equals(address, publisher.address) &&
+        Objects.equals(city, publisher.city) &&
+        Objects.equals(state, publisher.state) &&
+        Objects.equals(zip, publisher.zip);
   }
 
   @Override
@@ -72,7 +112,10 @@ public class Publisher {
     return new StringJoiner(", ", Publisher.class.getSimpleName() + "[", "]")
         .add("id=" + id)
         .add("name='" + name + "'")
-        .add("books=" + books)
+        .add("address='" + address + "'")
+        .add("city='" + city + "'")
+        .add("state='" + state + "'")
+        .add("zip='" + zip + "'")
         .toString();
   }
 }
